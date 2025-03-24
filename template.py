@@ -1,10 +1,11 @@
 import os
 from pathlib import Path
 
+# Define the root directory name for the project
 project_name = "src"
 
+# List of files and directories to be created for the project structure
 list_of_files = [
-
     f"{project_name}/__init__.py",
     f"{project_name}/components/__init__.py",
     f"{project_name}/components/data_ingestion.py",  
@@ -44,14 +45,18 @@ list_of_files = [
     "config/schema.yaml",
 ]
 
-
+# Iterate through the list of files and create them if they don't exist
 for filepath in list_of_files:
-    filepath = Path(filepath)
-    filedir, filename = os.path.split(filepath)
+    filepath = Path(filepath)  # Convert to Path object for easier path manipulation
+    filedir, filename = os.path.split(filepath)  # Split into directory and filename
+    
+    # Create the directory if it doesn't exist
     if filedir != "":
         os.makedirs(filedir, exist_ok=True)
+    
+    # Create an empty file if it doesn't exist or is empty
     if (not os.path.exists(filepath)) or (os.path.getsize(filepath) == 0):
         with open(filepath, "w") as f:
-            pass
+            pass  # Create an empty file
     else:
-        print(f"file is already present at: {filepath}")
+        print(f"file is already present at: {filepath}")  # Notify if the file already exists
